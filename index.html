@@ -485,11 +485,11 @@
 <div class="kicker">16 · The next conversation</div>
       <h2>Which process came to mind?</h2>
       <p>That's the one we should look at first.</p>
-      <form class="cta-row" action="mailto:alex@hinschsystems.com" method="post" enctype="text/plain">
+      <div class="cta-row">
         <label for="email" style="position:absolute;left:-9999px;">Your email</label>
-        <input class="cta-input" type="email" id="email" name="email" placeholder="you@yourbusiness.com" required>
-        <button type="submit" class="cta-btn">Let's talk</button>
-      </form>
+        <input class="cta-input" type="email" id="email" placeholder="you@yourbusiness.com" required>
+        <button type="button" class="cta-btn" id="ctaBtn">Let's talk</button>
+      </div>
       <div class="cta-note">A short fit call is enough to decide whether The First Fix makes sense.</div>
     </div>
     <div class="slide-visual">
@@ -534,6 +534,24 @@
       });
     }, {root:deck, threshold:0.6});
     slides.forEach(function(s){ io.observe(s); });
+  }
+
+  var ctaBtn = document.getElementById('ctaBtn');
+  var ctaEmail = document.getElementById('email');
+  if(ctaBtn && ctaEmail){
+    ctaBtn.addEventListener('click', function(){
+      if(!ctaEmail.checkValidity()){
+        ctaEmail.reportValidity();
+        return;
+      }
+      var visitorEmail = ctaEmail.value.trim();
+      var subject = encodeURIComponent('The First Fix — let\'s talk');
+      var body = encodeURIComponent(
+        'Reply to: ' + visitorEmail + '\n\n' +
+        'The process that came to mind:\n'
+      );
+      window.location.href = 'mailto:alex@hinschsystems.com?subject=' + subject + '&body=' + body;
+    });
   }
 
   document.addEventListener('keydown', function(e){
