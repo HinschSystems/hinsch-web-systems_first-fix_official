@@ -134,6 +134,11 @@
   .cta-input::placeholder{color:#B9C8E2;}
   .cta-btn{background:#fff;color:var(--navy);font-weight:700;font-size:15px;padding:14px 26px;border-radius:9px;border:none;cursor:pointer;font-family:var(--font);}
   .cta-note{margin-top:16px;font-size:13px;color:#B9C8E2;}
+  .mailto-form{margin-top:34px;width:100%;max-width:560px;display:flex;flex-direction:column;gap:12px;}
+  .mailto-row{display:flex;gap:12px;flex-wrap:wrap;}
+  .mailto-row .cta-input{flex:1;min-width:200px;}
+  .mailto-textarea{width:100%;resize:vertical;min-height:84px;font-family:var(--font);}
+  .mailto-form .cta-btn{align-self:flex-start;}
 
   .slide-visual{position:absolute;top:50%;right:7vw;transform:translateY(-50%);width:150px;height:150px;opacity:0.95;color:inherit;pointer-events:none;}
   .slide-visual.wide{width:360px;height:auto;}
@@ -508,28 +513,15 @@
 <div class="kicker">16 · The next conversation</div>
       <h2>Which process came to mind?</h2>
       <p>That's the one we should look at first.</p>
-      <div class="ghl-form-wrap">
-        <iframe
-          src="https://api.leadconnectorhq.com/widget/form/MOvW4bSAlUjKRtRrZzHV"
-          style="width:100%;height:100%;border:none;border-radius:12px;background:transparent"
-          id="inline-MOvW4bSAlUjKRtRrZzHV"
-          data-layout="{'id':'INLINE'}"
-          data-trigger-type="alwaysShow"
-          data-trigger-value=""
-          data-activation-type="alwaysActivated"
-          data-activation-value=""
-          data-deactivation-type="neverDeactivate"
-          data-deactivation-value=""
-          data-form-name="First Fix - Opt-In"
-          data-height="undefined"
-          data-layout-iframe-id="inline-MOvW4bSAlUjKRtRrZzHV"
-          data-form-id="MOvW4bSAlUjKRtRrZzHV"
-          data-cookie-consent="true"
-          data-cookie-consent-provider="auto"
-          title="First Fix - Opt-In">
-        </iframe>
-      </div>
-      <div class="cta-note">A short fit call is enough to decide whether The First Fix makes sense.</div>
+      <form class="mailto-form" id="mailtoForm" onsubmit="return sendMailtoInquiry(event)">
+        <div class="mailto-row">
+          <input class="cta-input" type="text" id="mtName" placeholder="Your name" required>
+          <input class="cta-input" type="email" id="mtEmail" placeholder="Your email" required>
+        </div>
+        <textarea class="cta-input mailto-textarea" id="mtProcess" placeholder="Which process came to mind?" rows="3" required></textarea>
+        <button type="submit" class="cta-btn">Send it to Alex</button>
+      </form>
+      <div class="cta-note">Opens your email app with this pre-filled, addressed to alex@hinschsystems.com (cc alex@loudkid.com). Nothing is stored or sent anywhere else.</div>
     </div>
     <div class="slide-visual">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -540,6 +532,26 @@
   </section>
 
 </div>
+
+<script>
+function sendMailtoInquiry(e){
+  e.preventDefault();
+  var name = document.getElementById('mtName').value.trim();
+  var email = document.getElementById('mtEmail').value.trim();
+  var process = document.getElementById('mtProcess').value.trim();
+  var subject = encodeURIComponent('The First Fix — inquiry from ' + name);
+  var bodyLines = [
+    'Name: ' + name,
+    'Email: ' + email,
+    '',
+    'Process:',
+    process
+  ];
+  var body = encodeURIComponent(bodyLines.join('\n'));
+  window.location.href = 'mailto:alex@hinschsystems.com?cc=alex@loudkid.com&subject=' + subject + '&body=' + body;
+  return false;
+}
+</script>
 
 <script>
 (function(){
@@ -602,6 +614,5 @@
 })();
 </script>
 
-<script src="https://link.msgsndr.com/js/form_embed.js"></script>
 </body>
 </html>
