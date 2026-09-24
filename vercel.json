@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/company", "destination": "/", "permanent": true }
+    { "source": "/company", "destination": "/", "permanent": true },
+    { "source": "/where-we-start", "destination": "/", "permanent": true }
   ]
 }
