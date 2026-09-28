@@ -513,15 +513,29 @@
 <div class="kicker">16 · The next conversation</div>
       <h2>Which process came to mind?</h2>
       <p>That's the one we should look at first.</p>
-      <form class="mailto-form" id="mailtoForm" onsubmit="return sendMailtoInquiry(event)">
-        <div class="mailto-row">
-          <input class="cta-input" type="text" id="mtName" placeholder="Your name" required>
-          <input class="cta-input" type="email" id="mtEmail" placeholder="Your email" required>
-        </div>
-        <textarea class="cta-input mailto-textarea" id="mtProcess" placeholder="Which process came to mind?" rows="3" required></textarea>
-        <button type="submit" class="cta-btn">Send it to Alex</button>
-      </form>
-      <div class="cta-note">Opens your email app with this pre-filled, addressed to alex@hinschsystems.com (cc alex@loudkid.com). Nothing is stored or sent anywhere else.</div>
+      <div class="ghl-form-wrap">
+        <iframe
+          src="https://api.leadconnectorhq.com/widget/form/1x2zfrCs179rGyStkAfH"
+          style="width:100%;height:100%;border:none;border-radius:8px"
+          id="inline-1x2zfrCs179rGyStkAfH"
+          data-layout="{'id':'INLINE'}"
+          data-trigger-type="alwaysShow"
+          data-trigger-value=""
+          data-activation-type="alwaysActivated"
+          data-activation-value=""
+          data-deactivation-type="neverDeactivate"
+          data-deactivation-value=""
+          data-form-name="First Fix — Website Lead Form"
+          data-height="undefined"
+          data-layout-iframe-id="inline-1x2zfrCs179rGyStkAfH"
+          data-form-id="1x2zfrCs179rGyStkAfH"
+          data-cookie-consent="true"
+          data-cookie-consent-provider="auto"
+          title="First Fix Website Lead Form"
+        ></iframe>
+        <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+      </div>
+      <div class="cta-note">Your submission will be stored in our CRM and used by Hinsch Web Systems to respond to your inquiry and send related follow-up emails.</div>
     </div>
     <div class="slide-visual">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -533,25 +547,6 @@
 
 </div>
 
-<script>
-function sendMailtoInquiry(e){
-  e.preventDefault();
-  var name = document.getElementById('mtName').value.trim();
-  var email = document.getElementById('mtEmail').value.trim();
-  var process = document.getElementById('mtProcess').value.trim();
-  var subject = encodeURIComponent('The First Fix: inquiry from ' + name);
-  var bodyLines = [
-    'Name: ' + name,
-    'Email: ' + email,
-    '',
-    'Process:',
-    process
-  ];
-  var body = encodeURIComponent(bodyLines.join('\n'));
-  window.location.href = 'mailto:alex@hinschsystems.com?cc=alex@loudkid.com&subject=' + subject + '&body=' + body;
-  return false;
-}
-</script>
 
 <script>
 (function(){
@@ -590,6 +585,13 @@ function sendMailtoInquiry(e){
       });
     }, {root:deck, threshold:0.6});
     slides.forEach(function(s){ io.observe(s); });
+  }
+
+  if(location.hash === '#s16'){
+    window.addEventListener('load', function(){
+      var s16 = document.getElementById('s16');
+      if(s16) s16.scrollIntoView({behavior:'auto'});
+    });
   }
 
   document.addEventListener('click', function(e){
